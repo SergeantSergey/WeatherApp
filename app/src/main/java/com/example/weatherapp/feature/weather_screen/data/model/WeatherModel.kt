@@ -14,5 +14,8 @@ data class WeatherModel(
     val cod: Int,
 
     @SerializedName("main")
-    val main: WeatherMainModel
+    val main: WeatherMainModel,
+
+    @SerializedName("wind")
+    val wind: WindModel
 )

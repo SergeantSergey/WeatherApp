@@ -4,5 +4,6 @@ data class WeatherDomainModel(
     val temperature: Float,
     val temperatureMax: Float,
     val temperatureMin: Float,
-    val humidity:Int
+    val humidity: Int,
+    val windSpeed: Float
 )

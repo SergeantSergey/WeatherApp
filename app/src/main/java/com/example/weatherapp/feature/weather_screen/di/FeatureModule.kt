@@ -19,22 +19,19 @@ val weatherScreenModule = module {
         get<Retrofit>().create(WeatherApi::class.java)
     }
 
-    scope<WeatherScreenActivity> {
+    single {
+        WeatherRemoteSource(api = get())
+    }
 
-        viewModel {
-            WeatherScreenViewModel(weatherInteractor = get(), cityInteractor = get())
-        }
+    single<WeatherRepo> {
+        WeatherRepoImp(weatherRemoteSource = get())
+    }
 
-        scoped {
-            WeatherInteractor(weatherRepo = get())
-        }
+    single {
+        WeatherInteractor(weatherRepo = get())
+    }
 
-        scoped<WeatherRepo> {
-            WeatherRepoImp(weatherRemoteSource = get())
-        }
-
-        scoped {
-            WeatherRemoteSource(api = get())
-        }
+    viewModel {
+        WeatherScreenViewModel(weatherInteractor = get(), cityInteractor = get())
     }
 }

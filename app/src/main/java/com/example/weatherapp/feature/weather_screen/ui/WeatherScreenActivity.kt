@@ -5,21 +5,11 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import com.example.weatherapp.R
 import com.example.weatherapp.feature.weather_screen.domain.model.WeatherDomainModel
-import org.koin.android.scope.AndroidScopeComponent
-import org.koin.androidx.scope.activityRetainedScope
-import org.koin.androidx.scope.activityScope
-import org.koin.androidx.viewmodel.ViewModelOwnerDefinition
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.androidx.viewmodel.scope.getViewModel
-import org.koin.androidx.viewmodel.scope.viewModel
-import org.koin.core.scope.Scope
 
-class WeatherScreenActivity : AppCompatActivity(), AndroidScopeComponent {
-
-    override val scope: Scope by activityScope()
+class WeatherScreenActivity : AppCompatActivity() {
 
     private val weatherViewModel by viewModel<WeatherScreenViewModel>()
 

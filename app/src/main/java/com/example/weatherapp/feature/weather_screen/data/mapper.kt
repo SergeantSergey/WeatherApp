@@ -8,6 +8,7 @@ fun WeatherModel.toDomain(): WeatherDomainModel {
         temperature = this.main.temp,
         temperatureMax = this.main.tempMax,
         temperatureMin = this.main.tempMin,
-        humidity = this.main.humidity
+        humidity = this.main.humidity,
+        windSpeed = this.wind.speed
     )
 }

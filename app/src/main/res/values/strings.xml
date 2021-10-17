@@ -2,10 +2,13 @@
     <string name="app_name">WeatherApp</string>
 
     <string name="weather">Weather</string>
+    <string name="wind">Wind</string>
     <string name="settings">Setting</string>
     <string name="get">Get</string>
     <string name="temperature">Temperature: %1$f</string>
+    <string name="wind_speed">Wind speed: %1$f</string>
     <string name="temperature_max">Max temperature: %1$f</string>
     <string name="temperature_min">Min Temperature: %1$f</string>
     <string name="humidity">Humidity: %1$d</string>
+    <string name="change_to_orenburg">Change to Orenburg</string>
 </resources>
