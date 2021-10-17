@@ -12,8 +12,9 @@ import kotlinx.coroutines.flow.map
 class CityDataStore(private val context: Context) {
 
     companion object {
-        private const val CITY_PREFERENCES_NAME = "CITY_PREFERENCES_NAME"
-        private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = CITY_PREFERENCES_NAME)
+        private const val CITY_PREFERENCES = "CITY_PREFERENCES"
+        private val Context.dataStore: DataStore<Preferences>
+                by preferencesDataStore(name = CITY_PREFERENCES)
     }
 
     private val cityName = CityScheme.CITY_NAME

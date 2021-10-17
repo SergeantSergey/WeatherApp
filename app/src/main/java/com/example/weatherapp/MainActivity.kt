@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.weatherapp.feature.city_screen.ui.CityScreenActivity
-import com.example.weatherapp.feature.city_screen.ui.CityScreenViewModel
 import com.example.weatherapp.feature.weather_screen.ui.WeatherScreenActivity
 
 class MainActivity : AppCompatActivity() {
