@@ -18,14 +18,14 @@ class WindScreenActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_wind_screen)
 
-        windScreenViewModel.windLiveData.observe(this, Observer(::render))
+        windScreenViewModel.viewState.observe(this, Observer(::render))
 
         findViewById<Button>(R.id.btnRequestWind).setOnClickListener {
-            windScreenViewModel.requestWind()
+            windScreenViewModel.processUiEvent(UiEvent.RequestWind)
         }
     }
 
-    private fun render(state: WeatherDomainModel) {
+    private fun render(state: ViewState) {
         findViewById<TextView>(R.id.tvWind).text = getString(R.string.wind_speed, state.windSpeed)
     }
 }
