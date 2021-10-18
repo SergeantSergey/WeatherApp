@@ -1,15 +1,25 @@
 package com.example.weatherapp.feature.city_screen.ui
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.example.weatherapp.base.BaseViewModel
+import com.example.weatherapp.base.Event
 import com.example.weatherapp.feature.city_screen.domain.CityInteractor
-import kotlinx.coroutines.launch
 
-class CityScreenViewModel(private val cityInteractor: CityInteractor) : ViewModel() {
+class CityScreenViewModel(private val cityInteractor: CityInteractor) : BaseViewModel<ViewState>() {
 
-    fun setCityName(name: String) {
-        viewModelScope.launch {
-            cityInteractor.setName(name)
+    override fun initialViewState(): ViewState {
+        return ViewState(
+            errorMessage = ""
+        )
+    }
+
+    override suspend fun reduce(event: Event, previousState: ViewState): ViewState? {
+        when (event) {
+
+            is UiEvent.SetCity -> {
+                cityInteractor.setName(event.cityName)
+            }
         }
+
+        return null
     }
 }
