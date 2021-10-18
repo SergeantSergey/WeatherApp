@@ -18,10 +18,9 @@ class WindScreenViewModel(
 
     fun requestWind() {
         viewModelScope.launch {
-            cityInteractor.getName().collect {
-                val value = weatherInteractor.getWeather(it.cityName)
-                windLiveData.postValue(value)
-            }
+            val cityModel = cityInteractor.getName()
+            val value = weatherInteractor.getWeather(cityModel.cityName)
+//            windLiveData.postValue(value)
         }
     }
 }

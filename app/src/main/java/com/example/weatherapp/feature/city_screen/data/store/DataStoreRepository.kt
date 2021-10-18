@@ -7,5 +7,5 @@ interface DataStoreRepository {
 
     suspend fun setName(name: String)
 
-    suspend fun getName(): Flow<CityPreferencesModel>
+    suspend fun getName(): CityPreferencesModel
 }
