@@ -14,6 +14,6 @@ class CityScreenActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_city_screen)
 
-        cityScreenViewModel.setCityName("Orenburg")
+        cityScreenViewModel.processUiEvent(UiEvent.SetCity("Orenburg"))
     }
 }

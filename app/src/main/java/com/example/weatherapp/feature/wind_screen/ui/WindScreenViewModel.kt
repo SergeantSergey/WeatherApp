@@ -1,27 +1,55 @@
 package com.example.weatherapp.feature.wind_screen.ui
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.example.weatherapp.base.BaseViewModel
+import com.example.weatherapp.base.Event
 import com.example.weatherapp.feature.city_screen.domain.CityInteractor
 import com.example.weatherapp.feature.weather_screen.domain.WeatherInteractor
-import com.example.weatherapp.feature.weather_screen.domain.model.WeatherDomainModel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 class WindScreenViewModel(
     val weatherInteractor: WeatherInteractor,
     private val cityInteractor: CityInteractor
-) : ViewModel() {
+) : BaseViewModel<ViewState>() {
 
-    val windLiveData = MutableLiveData<WeatherDomainModel>()
+    override fun initialViewState(): ViewState {
+        return ViewState(
+            windSpeed = 0F,
+            errorMessage = ""
+        )
+    }
 
-    fun requestWind() {
-        viewModelScope.launch {
-            cityInteractor.getName().collect {
-                val value = weatherInteractor.getWeather(it.cityName)
-                windLiveData.postValue(value)
+    override suspend fun reduce(event: Event, previousState: ViewState): ViewState? {
+        when (event) {
+
+            is UiEvent.RequestWind -> {
+                val cityModel = cityInteractor.getName()
+                weatherInteractor.getWeather(cityModel.cityName).fold(
+                    onSuccess = { weatherDomainModel ->
+                        processDataEvent(
+                            DataEvent.SuccessWindRequest(
+                                windSpeed = weatherDomainModel.windSpeed
+                            )
+                        )
+                    },
+                    onError = {
+                        processDataEvent(
+                            DataEvent.ErrorWindRequest(it.localizedMessage ?: "Error!")
+                        )
+                    }
+                )
+            }
+
+            is DataEvent.SuccessWindRequest -> {
+                return previousState.copy(
+                    windSpeed = event.windSpeed
+                )
+            }
+
+            is DataEvent.ErrorWindRequest -> {
+                return previousState.copy(
+                    errorMessage = event.errorMessage
+                )
             }
         }
+        return null
     }
 }

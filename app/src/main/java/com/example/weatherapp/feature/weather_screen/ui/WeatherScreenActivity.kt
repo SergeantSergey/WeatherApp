@@ -21,14 +21,14 @@ class WeatherScreenActivity : AppCompatActivity() {
 
         val btnGet = findViewById<Button>(R.id.btnGet)
 
-        weatherViewModel.weatherLiveData.observe(this, Observer(::render))
+        weatherViewModel.viewState.observe(this, Observer(::render))
 
         btnGet.setOnClickListener {
-            weatherViewModel.requestWeather()
+            weatherViewModel.processUiEvent(UiEvent.RequestWeather)
         }
     }
 
-    private fun render(state: WeatherDomainModel) {
+    private fun render(state: ViewState) {
         findViewById<TextView>(R.id.tvTemperature).text =
             getString(R.string.temperature, state.temperature)
         findViewById<TextView>(R.id.tvTemperatureMax).text =

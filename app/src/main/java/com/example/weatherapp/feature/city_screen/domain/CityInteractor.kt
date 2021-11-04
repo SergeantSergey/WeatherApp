@@ -10,7 +10,7 @@ class CityInteractor(val dataStoreRepository: DataStoreRepository) {
         dataStoreRepository.setName(name)
     }
 
-    suspend fun getName(): Flow<CityPreferencesModel> {
+    suspend fun getName(): CityPreferencesModel {
         return dataStoreRepository.getName()
     }
 }
